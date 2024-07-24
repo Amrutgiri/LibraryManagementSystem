@@ -9,6 +9,8 @@ Route::get('/', function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');

@@ -11,4 +11,8 @@ class HomeController extends Controller
     {
         return view("welcome");
     }
+    public function profile()
+    {
+        return view('Frontend.User.profile');
+    }
 }
