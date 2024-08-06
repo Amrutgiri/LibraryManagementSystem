@@ -11,6 +11,11 @@
             <!-- Header -->
             <div class="row">
                 <div class="col-12">
+                    @session('success')
+                        <div class="alert alert-success mb-3" role="alert">
+                            {{ $value }}
+                        </div>
+                    @endsession
                     <div class="card mb-6">
                         <div class="user-profile-header-banner">
                             {{-- <img src="Frontend/assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top"> --}}
@@ -24,7 +29,7 @@
                                 <div
                                     class="d-flex align-items-md-end align-items-sm-start align-items-md-center align-items-center justify-content-md-between justify-content-start mx-5 flex-md-row flex-column gap-4">
                                     <div class="user-profile-info">
-                                        <h4 class="mb-2 mt-lg-0">John Doe</h4>
+                                        <h4 class="mb-2 mt-lg-0">{{ auth()->user()->name }}</h4>
                                         <ul
                                             class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4 my-2">
                                             <li class="list-inline-item d-flex gap-2 align-items-center">
@@ -80,15 +85,15 @@
                             <small class="card-text text-uppercase text-muted small">About</small>
                             <ul class="list-unstyled my-3 py-1">
                                 <li class="d-flex align-items-center mb-4"><i class="ti ti-user ti-lg"></i><span
-                                        class="fw-medium mx-2">Full Name:</span> <span>John Doe</span></li>
+                                        class="fw-medium mx-2">Full Name:</span> <span>{{ auth()->user()->name }}</span>
+                                </li>
                                 <li class="d-flex align-items-center mb-4"><i class="ti ti-check ti-lg"></i><span
                                         class="fw-medium mx-2">Status:</span> <span>Active</span></li>
                                 <li class="d-flex align-items-center mb-4"><i class="ti ti-crown ti-lg"></i><span
-                                        class="fw-medium mx-2">Role:</span> <span>Developer</span></li>
+                                        class="fw-medium mx-2">Role:</span> <span>User</span></li>
                                 <li class="d-flex align-items-center mb-4"><i class="ti ti-flag ti-lg"></i><span
-                                        class="fw-medium mx-2">Country:</span> <span>USA</span></li>
-                                <li class="d-flex align-items-center mb-2"><i class="ti ti-language ti-lg"></i><span
-                                        class="fw-medium mx-2">Languages:</span> <span>English</span></li>
+                                        class="fw-medium mx-2">Country:</span> <span>India</span></li>
+
                             </ul>
                             <small class="card-text text-uppercase text-muted small">Contacts</small>
                             <ul class="list-unstyled my-3 py-1">

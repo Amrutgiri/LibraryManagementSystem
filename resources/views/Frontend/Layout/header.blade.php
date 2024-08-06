@@ -63,7 +63,7 @@
             <!-- Toolbar: Start -->
             <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Style Switcher -->
-                <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
+                {{-- <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-1">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                         <i class="ti ti-lg"></i>
                     </a>
@@ -85,15 +85,34 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!-- / Style Switcher-->
 
                 <!-- navbar button: Start -->
-                <li>
-                    <a href="{{ route('login') }}" class="btn btn-primary"><span
-                            class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span
-                            class="d-none d-md-block">Login/Register</span></a>
-                </li>
+                @if (Auth::check())
+                    <li>
+                        <a href="{{ route('profile') }}" class="btn btn-success me-3"><span
+                                class="tf-icons ti ti-user scaleX-n1-rtl me-md-1"></span><span
+                                class="d-none d-md-block">Hi, {{ auth()->user()->name }}</span></a>
+
+                    </li>
+                    <li>
+                        <a href="{{ route('profile') }}" class="btn btn-primary me-3"><span
+                                class="tf-icons ti ti-user scaleX-n1-rtl me-md-1"></span><span
+                                class="d-none d-md-block">Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}" class="btn btn-danger"><span
+                                class="tf-icons ti ti-logout scaleX-n1-rtl me-md-1"></span><span
+                                class="d-none d-md-block">Logout</span></a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}" class="btn btn-primary"><span
+                                class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span
+                                class="d-none d-md-block">Login/Register</span></a>
+                    </li>
+                @endif
                 <!-- navbar button: End -->
             </ul>
             <!-- Toolbar: End -->
