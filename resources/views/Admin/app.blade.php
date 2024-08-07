@@ -11,18 +11,20 @@
     <link rel="icon" type="image/png" sizes="32x32" href="vendors/images/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="vendors/images/favicon-16x16.png" />
 
-    <!-- Mobile Specific Metas -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="vendors/styles/core.css" />
-    <link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css" />
-    <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('Admin/vendors/styles/core.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('Admin/vendors/styles/icon-font.min.css') }}" />
+    {{-- <link rel="stylesheet" type="text/css"
+        href="{{ asset('Admin/src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}" />
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('Admin/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}" /> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('Admin/vendors/styles/style.css') }}" />
 
     @yield('css')
 </head>
@@ -34,20 +36,40 @@
         <div class="xs-pd-20-10 pd-ltr-20">
             @yield('content')
 
-            @include('Admin.layouts.footer')
+            {{-- @include('Admin.layouts.footer') --}}
         </div>
     </div>
 
-    <script src="vendors/scripts/core.js"></script>
-    <script src="vendors/scripts/script.min.js"></script>
-    <script src="vendors/scripts/process.js"></script>
-    <script src="vendors/scripts/layout-settings.js"></script>
-    <script src="src/plugins/apexcharts/apexcharts.min.js"></script>
-    <script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-    <script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-    <script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-    <script src="vendors/scripts/dashboard3.js"></script>
+    <script src="{{ asset('Admin/vendors/scripts/core.js') }}"></script>
+    <script src="{{ asset('Admin/vendors/scripts/script.min.js') }}"></script>
+    <script src="{{ asset('Admin/vendors/scripts/process.js') }}"></script>
+    <script src="{{ asset('Admin/vendors/scripts/layout-settings.js') }}"></script>
+    <script src="{{ asset('Admin/src/plugins/apexcharts/apexcharts.min.js') }}"></script>
+    {{-- <script src="{{ asset('Admin/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('Admin/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('Admin/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('Admin/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script> --}}
+    <script src="{{ asset('Admin/vendors/scripts/dashboard3.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        const csrfToken = "{{ csrf_token() }}";
+        const adminId = "{{ Auth::guard('admin')->id() }}";
+
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: false,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+    </script>
 
     @yield('js')
 </body>

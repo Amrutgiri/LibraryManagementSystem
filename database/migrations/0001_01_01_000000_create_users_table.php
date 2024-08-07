@@ -18,6 +18,9 @@ return new class extends Migration {
             $table->string('password');
             $table->tinyInteger('role_as')->default(0)->comment('0=user, 1=admin');
             $table->tinyInteger('status')->default(0)->comment('0=inactive, 1=active');
+            $table->string('profile_picture')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

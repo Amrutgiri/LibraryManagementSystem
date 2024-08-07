@@ -11,31 +11,17 @@
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-house"></span><span class="mtext">Home</span>
+                <li class="dropdown {{ Route::is('admin.dashboard') ? 'show' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-house"></span>Home
                     </a>
-                    <ul class="submenu">
-                        <li><a href="index.html">Dashboard style 1</a></li>
-                        <li><a href="index2.html">Dashboard style 2</a></li>
-                        <li><a href="index3.html">Dashboard style 3</a></li>
-                    </ul>
+
                 </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-textarea-resize"></span><span class="mtext">Forms</span>
+                <li class="dropdown {{ Route::is('admin.users') ? 'show' : '' }}">
+                    <a href="{{ route('admin.users') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-people"></span><span class="mtext">Users</span>
                     </a>
-                    <ul class="submenu">
-                        <li><a href="form-basic.html">Form Basic</a></li>
-                        <li>
-                            <a href="advanced-components.html">Advanced Components</a>
-                        </li>
-                        <li><a href="form-wizard.html">Form Wizard</a></li>
-                        <li><a href="html5-editor.html">HTML5 Editor</a></li>
-                        <li><a href="form-pickers.html">Form Pickers</a></li>
-                        <li><a href="image-cropper.html">Image Cropper</a></li>
-                        <li><a href="image-dropzone.html">Image Dropzone</a></li>
-                    </ul>
+
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
