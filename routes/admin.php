@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,9 +36,11 @@ Route::middleware('admin')->group(function () {
     Route::put('/genre/update/{id}', [GenreController::class, 'update'])->name('genre.update');
     Route::post('/genre/delete/{id}', [GenreController::class, 'delete'])->name('genre.delete');
     Route::post('/genre/status/change/{id}', [GenreController::class, 'statusChange'])->name('genre.status.change');
-    // Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    // Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
-    // Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-    // Route::post('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
-    // Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+
+    Route::get('/department/manage', [DepartmentController::class, 'index'])->name('department.manage');
+    Route::post('/department/list-data', [DepartmentController::class, 'listData'])->name('department.list.data');
+    Route::post('/department/store', [DepartmentController::class, 'store'])->name('department.store');
+    Route::put('/department/update/{id}', [DepartmentController::class, 'update'])->name('department.update');
+    Route::post('/department/delete/{id}', [DepartmentController::class, 'delete'])->name('department.delete');
+    Route::post('/department/status/change/{id}', [DepartmentController::class, 'statusChange'])->name('department.status.change');
 });

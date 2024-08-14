@@ -12,7 +12,7 @@ class GenreController extends Controller
     public function index()
     {
         return view('Admin.genre.index', [
-            'title' => 'Book Type',
+            'title' => 'Book Type - Genre',
         ]);
     }
     public function listData(Request $request)
