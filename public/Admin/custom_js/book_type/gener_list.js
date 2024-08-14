@@ -1,9 +1,8 @@
 $(document).ready(function() {
-    $('#rack-form').parsley();
+    $('#genre-form').parsley();
 
 });
-
-var rackTable = $('#rack_table').DataTable({
+var genreTable = $('#genre_table').DataTable({
     searchDelay: 500,
     processing: true,
     serverSide: true,
@@ -14,7 +13,7 @@ var rackTable = $('#rack_table').DataTable({
     ],
 
     ajax: {
-        url: rackListUrl,
+        url: genreListUrl,
         type: 'POST',
         data: {
             // parameters for custom backend script demo
@@ -31,9 +30,6 @@ var rackTable = $('#rack_table').DataTable({
         {
             data: 'serial_no',
 
-        },
-        {
-            data: 'notes',
         },
         {
             data: 'create_at',
@@ -58,7 +54,7 @@ var rackTable = $('#rack_table').DataTable({
             title: 'Actions',
             orderable: false,
             render: function (data, type, full, meta) {
-                return ' <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-light-primary btn-active-primary edit_rack" data-toggle="modal" data-target="#staticBackdrop" data-id="'+data+'" data-name="'+full.name+'" data-serial-no="'+full.serial_no+'" data-notes="'+full.notes+'" data-title="Edit Rack">\
+                return ' <a href="javascript:void(0)" class="btn btn-sm btn-icon btn-light-primary btn-active-primary edit_genre" data-toggle="modal" data-target="#staticBackdrop" data-id="'+data+'" data-name="'+full.name+'" data-serial-no="'+full.serial_no+'" data-title="Edit Genre">\
 								<span class="svg-icon">\
                                     <i class="icon-copy bi bi-pencil-square text-primary" style="font-size: 1.5rem;"></i>\
 								</span>\
@@ -102,59 +98,55 @@ var rackTable = $('#rack_table').DataTable({
 
 });
 
-$('#rack_table').on('click', '.edit_rack', function() {
+$('#genre_table').on('click', '.edit_genre', function() {
     var id = $(this).attr('data-id');
     var name = $(this).attr('data-name');
     var serial_no = $(this).attr('data-serial-no');
-    var notes = $(this).attr('data-notes');
     var title = $(this).attr('data-title');
 
     $('#staticBackdropLabel').html(title);
-    $('#rack_id').val(id);
-    $('#rack_name').val(name);
-    $('#rack_serial').val(serial_no);
-    $('#rack_notes').val(notes);
-    $('#save_rack').hide();
-    $('#update_rack').show();
+    $('#genre_id').val(id);
+    $('#genre_name').val(name);
+    $('#genre_serial').val(serial_no);
+    $('#save_genre').hide();
+    $('#update_genre').show();
 
 })
 
-$('.add_rack').on('click', function() {
-    $('#staticBackdropLabel').html('Add Rack');
-    $('#rack_id').val('');
-    $('#rack_name').val('');
-    $('#rack_serial').val('');
+$('.add_genre').on('click', function() {
+    $('#staticBackdropLabel').html('Add Genre');
+    $('#genre_id').val('');
+    $('#genre_name').val('');
+    $('#genre_serial').val('');
     $('#rack_notes').val('');
-    $('#save_rack').show();
-    $('#update_rack').hide();
-});
+    $('#save_genre').show();
+    $('#update_genre').hide();
+})
 
 $('#staticBackdrop').on('hide.bs.modal', function (event) {
-    $('#staticBackdropLabel').html('Add Rack');
-    $('#rack_id').val('');
-    $('#rack_name').val('');
-    $('#rack_serial').val('');
+    $('#staticBackdropLabel').html('Add Genre');
+    $('#genre_id').val('');
+    $('#genre_name').val('');
+    $('#genre_serial').val('');
     $('#rack_notes').val('');
-    $('#save_rack').show();
-    $('#update_rack').hide();
+    $('#save_genre').show();
+    $('#update_genre').hide();
   })
 
-$('#save_rack').on("click", function(e) {
+  $('#save_genre').on("click", function(e) {
     e.preventDefault();
-    if ($('#rack-form').parsley().validate()) {
+    if ($('#genre-form').parsley().validate()) {
         $.ajax({
             type: "POST",
-            url: rackStoreUrl,
-            data: $('#rack-form').serialize(),
+            url: genreStoreUrl,
+            data: $('#genre-form').serialize(),
             success: function(response) {
-
-
                 Toast.fire({
                     icon: 'success',
-                    title: "<span style='color:black'>Rack Added Successfully</span>",
+                    title: "<span style='color:black'>Genre Added Successfully</span>",
                 })
                 $('#staticBackdrop').modal('hide');
-                $('#rack_table').DataTable().ajax.reload();
+                $('#genre_table').DataTable().ajax.reload();
 
             },
             error: function(response) {
@@ -169,21 +161,21 @@ $('#save_rack').on("click", function(e) {
     }
 });
 
-$('#update_rack').on("click", function(e) {
+$('#update_genre').on("click", function(e) {
     e.preventDefault();
-    var rack_id = $('#rack_id').val();
-    if ($('#rack-form').parsley().validate()) {
+    var genre_id = $('#genre_id').val();
+    if ($('#genre-form').parsley().validate()) {
         $.ajax({
             type: "PUT",
-            url: "update/"+rack_id,
-            data: $('#rack-form').serialize(),
+            url: "update/"+genre_id,
+            data: $('#genre-form').serialize(),
             success: function(response) {
                 Toast.fire({
                     icon: 'success',
-                    title: "<span style='color:black'>Rack Updated Successfully</span>",
+                    title: "<span style='color:black'>Genre Updated Successfully</span>",
                 })
                 $('#staticBackdrop').modal('hide');
-                $('#rack_table').DataTable().ajax.reload();
+                $('#genre_table').DataTable().ajax.reload();
             },
             error: function(response) {
                 Toast.fire({
@@ -197,27 +189,6 @@ $('#update_rack').on("click", function(e) {
 
     }
 });
-
-function statusChangeFunction(e) {
-    var url = $(e).attr('data-url');
-    var status = $(e).attr('data-status');
-    $.ajax({
-        method: "POST",
-        url: url,
-        data: {
-            status: status,
-            "_token": csrfToken
-        },
-        success: function (resultData) {
-            $('#rack_table').DataTable().ajax.reload();
-            Toast.fire({
-                icon: 'success',
-                title: "<span style='color:black'>The status updated success.</span>",
-            })
-
-        }
-    })
-}
 
 function destroyFunction(e) {
 
@@ -243,10 +214,10 @@ function destroyFunction(e) {
                 data: {id:id, "_token": csrfToken},
                 dataType: "json",
                 success: function (response) {
-                    $('#rack_table').DataTable().ajax.reload();
+                    $('#genre_table').DataTable().ajax.reload();
                     Toast.fire({
                         icon: 'info',
-                        title: "<span style='color:black'>Rack Deleted Successfully</span>",
+                        title: "<span style='color:black'>Genre Deleted Successfully</span>",
                     })
                 }
             });
@@ -255,4 +226,24 @@ function destroyFunction(e) {
 
         }
 	});
+}
+function statusChangeFunction(e) {
+    var url = $(e).attr('data-url');
+    var status = $(e).attr('data-status');
+    $.ajax({
+        method: "POST",
+        url: url,
+        data: {
+            status: status,
+            "_token": csrfToken
+        },
+        success: function (resultData) {
+            $('#genre_table').DataTable().ajax.reload();
+            Toast.fire({
+                icon: 'success',
+                title: "<span style='color:black'>The status updated success.</span>",
+            })
+
+        }
+    })
 }

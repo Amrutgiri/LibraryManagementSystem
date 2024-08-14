@@ -58,7 +58,7 @@
                         <ul>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/img.jpg" alt="" />
+                                    <img src="{{asset('Admin/vendors/images/img.jpg')}}" alt="" />
                                     <h3>John Doe</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -68,7 +68,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/photo1.jpg" alt="" />
+                                    <img src="{{asset('Admin/vendors/images/photo1.jpg')}}" alt="" />
                                     <h3>Lea R. Frith</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -78,7 +78,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/photo2.jpg" alt="" />
+                                    <img src="{{asset('Admin/vendors/images/photo2.jpg')}}" alt="" />
                                     <h3>Erik L. Richards</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -88,7 +88,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/photo3.jpg" alt="" />
+                                    <img src="{{asset('Admin/vendors/images/photo3.jpg')}}" alt="" />
                                     <h3>John Doe</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -98,7 +98,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/photo4.jpg" alt="" />
+                                    <img src="{{asset('Admin/vendors/images/photo4.jpg')}}" alt="" />
                                     <h3>Renee I. Hansen</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -108,7 +108,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="vendors/images/img.jpg" alt="" />
+                                    <img src="{{asset('Admin/vendors/images/img.jpg')}}" alt="" />
                                     <h3>Vicki M. Coleman</h3>
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -125,7 +125,7 @@
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                     <span class="user-icon">
-                        <img src="vendors/images/photo1.jpg" alt="" />
+                        <img src="{{asset('Admin/vendors/images/photo1.jpg')}}" alt="" />
                     </span>
                     <span class="user-name">{{ Auth::guard('admin')->user()->name }}</span>
                 </a>
