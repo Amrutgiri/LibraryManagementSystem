@@ -25,17 +25,17 @@
     <div class="card-box mb-30">
         <div class="d-flex justify-content-between align-items-center">
             <div class="p-4">
-                <a href="{{ route('admin.genre.manage') }}" class="custom-tab active">Gener</a>
-                <a href="{{ route('admin.department.manage') }}" class="custom-tab">Department</a>
-                <a href="{{ route('admin.language.manage') }}" class="custom-tab">Language</a>
+                <a href="{{ route('admin.genre.manage') }}" class="custom-tab">Gener</a>
+                <a href="{{ route('admin.department.manage') }}" class="custom-tab ">Department</a>
+                <a href="{{ route('admin.language.manage') }}" class="custom-tab active">Language</a>
             </div>
             <div class="p-4">
-                <a href="javascript:void(0)" class="btn btn-primary float-right add_genre" data-toggle="modal"
-                    data-target="#staticBackdrop"><i class="bi bi-plus-circle mr-2"></i>Add Genre</a>
+                <a href="javascript:void(0)" class="btn btn-primary float-right add_lang" data-toggle="modal"
+                    data-target="#staticBackdrop"><i class="bi bi-plus-circle mr-2"></i>Add Language</a>
             </div>
         </div>
         <div class="p-3">
-            <table class="table hover" id="genre_table">
+            <table class="table hover" id="lang_table">
                 <thead>
                     <tr>
                         <th>#ID</th>
@@ -58,30 +58,31 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add New Genre</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Add New Language</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="genre-form" data-parsley-validate="">
+                    <form id="lang-form" data-parsley-validate="">
                         @csrf
-                        <input type="hidden" name="genre_id" id="genre_id">
+                        <input type="hidden" name="lang_id" id="lang_id">
                         <div class="form-group">
-                            <label for="rack_name">Genre Name</label>
-                            <input type="text" class="form-control" name="name" id="genre_name"
-                                placeholder="Enter Rack Name" required="" data-parsley-trigger="keyup" maxlength="35">
+                            <label for="lang_name">Language Name</label>
+                            <input type="text" class="form-control" name="name" id="lang_name"
+                                placeholder="Enter Language Name" required="" data-parsley-trigger="keyup"
+                                maxlength="35">
                         </div>
                         <div class="form-group">
-                            <label for="rack_serial">Genre Serial No</label>
-                            <input type="number" class="form-control" name="serial_no" id="genre_serial"
-                                placeholder="Enter Rack Serial No" maxlength="3">
+                            <label for="lang_serial">Language Serial No</label>
+                            <input type="number" class="form-control" name="serial_no" id="lang_serial"
+                                placeholder="Enter Language Serial No" maxlength="3">
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="save_genre">Save</button>
-                    <button type="button" class="btn btn-primary" id="update_genre">Update</button>
+                    <button type="button" class="btn btn-primary" id="save_lang">Save</button>
+                    <button type="button" class="btn btn-primary" id="update_lang">Update</button>
                 </div>
                 </form>
             </div>
@@ -94,8 +95,8 @@
 
     <script src="{{ asset('Admin/datatables/datatables.min.js') }}"></script>
     <script>
-        var genreListUrl = "{{ route('admin.genre.list.data') }}";
-        var genreStoreUrl = "{{ route('admin.genre.store') }}";
+        var langListUrl = "{{ route('admin.language.list.data') }}";
+        var langStoreUrl = "{{ route('admin.language.store') }}";
     </script>
-    <script src="{{ asset('Admin/custom_js/book_type/gener_list.js') }}"></script>
+    <script src="{{ asset('Admin/custom_js/book_type/language_list.js') }}"></script>
 @endsection

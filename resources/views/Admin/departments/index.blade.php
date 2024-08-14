@@ -27,7 +27,7 @@
             <div class="p-4">
                 <a href="{{ route('admin.genre.manage') }}" class="custom-tab">Gener</a>
                 <a href="{{ route('admin.department.manage') }}" class="custom-tab active">Department</a>
-                <a href="javascript:void(0)" class="custom-tab">Language</a>
+                <a href="{{ route('admin.language.manage') }}" class="custom-tab">Language</a>
             </div>
             <div class="p-4">
                 <a href="javascript:void(0)" class="btn btn-primary float-right add_dept" data-toggle="modal"

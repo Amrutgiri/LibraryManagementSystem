@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Lang;
 use Throwable;
-use App\Models\Gener;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class GenreController extends Controller
+class LanguageController extends Controller
 {
     public function index()
     {
-        return view('Admin.genre.index', [
-            'title' => 'Book Type - Genre',
+        return view('Admin.languages.index', [
+            'title' => 'Book Type - Languages'
         ]);
     }
     public function listData(Request $request)
@@ -30,27 +31,27 @@ class GenreController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
 
-        $genres = Gener::orderBy($order, $dir);
-        $totalData = $genres->count();
+        $languages = Language::orderBy($order, $dir);
+        $totalData = $languages->count();
 
         $totalFiltered = $totalData;
 
         if (!empty($request->input('search.value'))) {
             $search = $request->input('search.value');
-            $genres = $genres->where(function ($query) use ($search) {
+            $languages = $languages->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%{$search}%")
                     ->orWhere('created_at', 'LIKE', "%{$search}%");
             });
 
-            $totalFiltered = $genres->count();
+            $totalFiltered = $languages->count();
         }
-        $genres = $genres->offset($start)
+        $languages = $languages->offset($start)
             ->limit($limit)
             ->get();
         $data = array();
-        if (!empty($genres)) {
+        if (!empty($languages)) {
             $sr_no = '1';
-            foreach ($genres as $row) {
+            foreach ($languages as $row) {
                 $nestedData['id'] = $row->id;
                 $nestedData['name'] = $row->name ?? 'N/A';
                 $nestedData['create_at'] = $row->created_at->format('d-m-Y H:i:s') ?? 'N/A';
@@ -59,7 +60,7 @@ class GenreController extends Controller
                 // $nestedData['show_url'] = route('admin.user.show', $user->id);
                 // $nestedData['edit_url'] = route('admin.row.edit', $row->id);
                 // $nestedData['destroy_url'] = route('admin.row.delete', $row->id);
-                $nestedData['status_change_url'] = route('admin.genre.status.change', $row->id);
+                $nestedData['status_change_url'] = route('admin.language.status.change', $row->id);
                 $nestedData['actions'] = $row->id;
                 $data[] = $nestedData;
                 $sr_no++;
@@ -80,13 +81,13 @@ class GenreController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'serial_no' => 'unique:geners',
+            'serial_no' => 'unique:languages',
         ]);
-        $rackManage = new Gener();
+        $rackManage = new Language();
         $rackManage->name = $request->name;
         $rackManage->serial_no = $request->serial_no;
         $rackManage->save();
-        return response()->json(['success' => true, 'message' => 'Genre Created Successfully.']);
+        return response()->json(['success' => true, 'message' => 'Language Added Successfully.']);
 
     }
     public function update(Request $request, $id)
@@ -95,21 +96,21 @@ class GenreController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
-                'serial_no' => 'unique:geners,serial_no,' . $id,
+                'serial_no' => 'unique:languages,serial_no,' . $id,
             ]);
-            $rack = Gener::find($id);
+            $rack = Language::find($id);
             if ($rack) {
                 $rack->name = $request->name;
                 $rack->serial_no = $request->serial_no;
                 $rack->update();
                 return response()->json([
                     'state' => true,
-                    'message' => 'Genre Updated Successfully.',
+                    'message' => 'Language Updated Successfully.',
                 ]);
             } else {
                 return response()->json([
                     'state' => false,
-                    'message' => 'Genre Not Found.',
+                    'message' => 'Department Not Found.',
                 ]);
             }
 
@@ -125,17 +126,17 @@ class GenreController extends Controller
     public function delete($id, Request $request)
     {
         try {
-            $Genre = Gener::find($id);
+            $Genre = Language::find($id);
             if ($Genre) {
                 $Genre->delete();
                 return response()->json([
                     'state' => true,
-                    'message' => 'Genre Deleted Successfully.',
+                    'message' => 'Language Deleted Successfully.',
                 ]);
             } else {
                 return response()->json([
                     'state' => false,
-                    'message' => 'Genre Not Found.',
+                    'message' => 'Language Not Found.',
                 ]);
             }
 
@@ -151,7 +152,7 @@ class GenreController extends Controller
     public function statusChange(Request $request, $id)
     {
         try {
-            $user = Gener::find($id);
+            $user = Language::find($id);
             if ($request->status == '1') {
                 $status = '0';
             } else {

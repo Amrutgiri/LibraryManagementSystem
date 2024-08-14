@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DepartmentController;
-use App\Http\Controllers\Admin\GenreController;
-use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\RackController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\GenreController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DepartmentController;
 
 
 
@@ -43,4 +44,11 @@ Route::middleware('admin')->group(function () {
     Route::put('/department/update/{id}', [DepartmentController::class, 'update'])->name('department.update');
     Route::post('/department/delete/{id}', [DepartmentController::class, 'delete'])->name('department.delete');
     Route::post('/department/status/change/{id}', [DepartmentController::class, 'statusChange'])->name('department.status.change');
+
+    Route::get('/language/manage', [LanguageController::class, 'index'])->name('language.manage');
+    Route::post('/language/list-data', [LanguageController::class, 'listData'])->name('language.list.data');
+    Route::post('/language/store', [LanguageController::class, 'store'])->name('language.store');
+    Route::put('/language/update/{id}', [LanguageController::class, 'update'])->name('language.update');
+    Route::post('/language/delete/{id}', [LanguageController::class, 'delete'])->name('language.delete');
+    Route::post('/language/status/change/{id}', [LanguageController::class, 'statusChange'])->name('language.status.change');
 });
