@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\BarcodeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\RackController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\GenreController;
@@ -51,4 +53,23 @@ Route::middleware('admin')->group(function () {
     Route::put('/language/update/{id}', [LanguageController::class, 'update'])->name('language.update');
     Route::post('/language/delete/{id}', [LanguageController::class, 'delete'])->name('language.delete');
     Route::post('/language/status/change/{id}', [LanguageController::class, 'statusChange'])->name('language.status.change');
+
+    Route::get('/book/manage', [BookController::class, 'index'])->name('book.manage');
+    Route::post('/book/list-data', [BookController::class, 'listData'])->name('book.list.data');
+    Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
+    Route::post('/book/store', [BookController::class, 'store'])->name('book.store');
+    Route::get('/book/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
+    Route::post('/book/update/{id}', [BookController::class, 'update'])->name('book.update');
+    Route::post('/book/delete/{id}', [BookController::class, 'delete'])->name('book.delete');
+    Route::post('/book/status/change/{id}', [BookController::class, 'statusChange'])->name('book.status.change');
+
+    Route::post('/barcode/generate', [BarcodeController::class, 'generateBarcode'])->name('book.barcode.generate');
+    Route::get('/barcode/manage/{bookId}', [BarcodeController::class, 'getBarcode'])->name('book.barcode.manage');
+    Route::post('/barcode/list-data/{bookId}', [BarcodeController::class, 'listData'])->name('barcode.list.data');
+    Route::get('/barcode/download/{bookId}', [BarcodeController::class, 'downloadBarcode'])->name('book.barcode.download');
+    Route::post('/barcode/delete/{id}', [BarcodeController::class, 'delete'])->name('barcode.delete');
+    Route::get('/barcode/delete/all/{bookId}', [BarcodeController::class, 'deleteAllBarcode'])->name('barcode.delete.all');
+
+
+
 });

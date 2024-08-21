@@ -35,6 +35,12 @@
                     </a>
                 </li>
 
+                <li class="dropdown {{ Route::is('admin.book.manage') ? 'show' : '' }}">
+                    <a href="{{ route('admin.book.manage') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-book"></span><span class="mtext">Book Manage</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>
