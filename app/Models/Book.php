@@ -29,6 +29,8 @@ class Book extends Model
         'genre',
         'notes',
         'number_of_copy',
+        'image',
+        'document',
         'status',
 
     ];

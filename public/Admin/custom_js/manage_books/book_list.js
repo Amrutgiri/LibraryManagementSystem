@@ -195,7 +195,11 @@ function destroyFunction(e) {
                 url: "delete/"+id,
                 data: {id:id, "_token": csrfToken},
                 dataType: "json",
+                 beforeSend: function () {
+                    $('#loader').show();
+                },
                 success: function (response) {
+                     $('#loader').hide();
                     $('#book_table').DataTable().ajax.reload();
                     Toast.fire({
                         icon: 'info',

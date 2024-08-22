@@ -27,6 +27,7 @@
         href="{{ asset('Admin/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}" /> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('Admin/vendors/styles/style.css') }}?{{ time() }}" />
     <link href="{{ asset('Admin/css/loader.css') }}?{{ time() }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('Admin/css/responsive.bootstrap.css') }}">
     @yield('css')
 </head>
 
@@ -56,6 +57,8 @@
     <script src="{{ asset('Admin/vendors/scripts/dashboard3.js') }}?{{ time() }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('Admin/js/dataTables.responsive.js') }}"></script>
+
 
     <script>
         const csrfToken = "{{ csrf_token() }}";

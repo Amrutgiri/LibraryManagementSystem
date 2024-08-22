@@ -1,10 +1,22 @@
 @extends('Admin.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('Admin/css/select2.min.css') }}">
-@endsection
+    <link rel="stylesheet" href="{{ asset('Admin/css/select2.min.css') }}?{{ time() }}">
+    <style>
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-
+        .preview-container img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+    </style>
 @section('content')
     <div class="title pb-20">
         <h2 class="h3 mb-0">{{ $title }}</h2>
@@ -159,8 +171,9 @@
                         <div class="row mb-3 d-flex align-items-center">
                             <label class="col-lg-4 font-weight-bold">Book Image</label>
                             <div class="col-lg-8">
-                                <input type="file" class="form-control" name="book_image"
-                                    placeholder="Enter Book Image" id="book_image" value="{{ old('book_image') }}">
+                                <input type="file" class="form-control" name="book_image[]"
+                                    placeholder="Enter Book Image" multiple accept=".jpeg,.jpg,.png,.gif" id="book_image"
+                                    value="{{ old('book_image') }}">
                             </div>
                         </div>
                     </div>
@@ -176,18 +189,25 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <div class="preview-container" id="preview-container"></div>
+                    </div>
+                    <div class="col-lg-6">
                         <button type="submit" class="btn btn-warning float-right ml-2 create_book">Save</button>
                         <a href="{{ route('admin.book.manage') }}" class="btn btn-dark float-right">Cancel</a>
                     </div>
                 </div>
             </form>
         </div>
+        <div class="row mt-2 p-3 mb-3">
+            <div class="col-lg-12">
+
+            </div>
+        </div>
     @endsection
 
     @section('js')
-        <script src="{{ asset('Admin/js/select2.min.js') }}"></script>
-
+        <script src="{{ asset('Admin/js/select2.min.js') }}?{{ time() }}"></script>
         <script>
             $(document).ready(function() {
                 $('.create_book').on("click", function() {
@@ -196,7 +216,27 @@
                         $('#loader').hide();
                     }, 2000);
                 });
+            });
+        </script>
+        <script>
+            const fileInput = document.getElementById('book_image');
+            const previewContainer = document.getElementById('preview-container');
 
+            fileInput.addEventListener('change', () => {
+                previewContainer.innerHTML = ''; // Clear previous previews
+                const files = fileInput.files;
+
+                for (const file of files) {
+                    const fileReader = new FileReader();
+
+                    fileReader.addEventListener('load', (e) => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = e.target.result;
+                        previewContainer.appendChild(imgElement);
+                    });
+
+                    fileReader.readAsDataURL(file);
+                }
             });
         </script>
     @endsection

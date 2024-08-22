@@ -2,6 +2,21 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('Admin/css/select2.min.css') }}">
+    <style>
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .preview-container img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+    </style>
 @endsection
 
 
@@ -168,8 +183,9 @@
                         <div class="row mb-3 d-flex align-items-center">
                             <label class="col-lg-4 font-weight-bold">Book Image</label>
                             <div class="col-lg-8">
-                                <input type="file" class="form-control" name="book_image"
-                                    placeholder="Enter Book Image" id="book_image" value="{{ old('book_image') }}">
+                                <input type="file" class="form-control" name="book_image[]"
+                                    placeholder="Enter Book Image" multiple accept=".jpeg,.jpg,.png,.gif" id="book_image"
+                                    value="{{ old('book_image') }}">
                             </div>
                         </div>
                     </div>
@@ -191,7 +207,25 @@
                     </div>
                 </div> --}}
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            @foreach ($bookImages as $row)
+                                <div class="col-lg-3 mt-5 text-center">
+                                    <img src="{{ url('book_images/' . $row->image) }}" alt="Book Image"
+                                        class="img-thumbnail w-100 h-100">
+                                    <button type="button" class="btn btn-danger btn-sm mt-2"
+                                        style="position: absolute;right:0;top:0;" data-id="{{ $row->id }}"
+                                        data-url="{{ route('admin.book.delete.image', $row->id) }}"
+                                        onclick="deleteImage(this)"><i class="bi bi-trash-fill"></i></button>
+                                </div>
+                            @endforeach
+                            <div class="col-lg-3 mt-5 text-center">
+                                <div class="preview-container" id="preview-container">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
                         <button type="submit" class="btn btn-warning float-right ml-2 ">Update</button>
                         <a href="{{ route('admin.book.manage') }}" class="btn btn-dark float-right">Cancel</a>
                     </div>
@@ -202,4 +236,50 @@
 
     @section('js')
         <script src="{{ asset('Admin/js/select2.min.js') }}"></script>
+        <script>
+            function deleteImage(e) {
+                var id = e.getAttribute('data-id');
+                var url = e.getAttribute('data-url');
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: id
+                    },
+                    success: function(response) {
+                        if (response.status == true) {
+                            Toast.fire({
+                                icon: 'success',
+                                title: "<span style='color:black'>'+response.message+'</span>",
+                            })
+                            location.reload();
+                        } else {
+                            alert();
+                        }
+                    }
+                });
+
+            }
+            const fileInput = document.getElementById('book_image');
+            const previewContainer = document.getElementById('preview-container');
+
+            fileInput.addEventListener('change', () => {
+                previewContainer.innerHTML = ''; // Clear previous previews
+                const files = fileInput.files;
+
+                for (const file of files) {
+                    const fileReader = new FileReader();
+
+                    fileReader.addEventListener('load', (e) => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = e.target.result;
+                        previewContainer.appendChild(imgElement);
+                    });
+
+                    fileReader.readAsDataURL(file);
+                }
+            });
+        </script>
     @endsection

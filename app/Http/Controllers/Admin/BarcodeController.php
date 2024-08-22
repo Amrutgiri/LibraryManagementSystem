@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\BookImage;
 use Throwable;
 use App\Models\Book;
 use App\Models\Barcode;
@@ -169,13 +170,15 @@ class BarcodeController extends Controller
     {
 
 
-        $Barcode = Barcode::findOrFail($bookId);
-        dd($Barcode);
-        if (File::exists($imagePath)) {
-            File::delete($imagePath);
+        $Barcode = Barcode::where('book_id', $bookId)->pluck('barcode_image')->toArray();
+        // dd($Barcode);
+        foreach ($Barcode as $imagePath) {
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
         }
-        if ($Barcode) {
-
+        $Barcodes = Barcode::where('book_id', $bookId)->delete();
+        if ($Barcodes) {
             return redirect(route('admin.book.manage'))->with('success', 'Barcode Deleted Successfully');
         } else {
             return redirect(route('admin.book.manage'))->with('error', 'Something Went to Wrong');

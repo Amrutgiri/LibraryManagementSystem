@@ -61,6 +61,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/book/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
     Route::post('/book/update/{id}', [BookController::class, 'update'])->name('book.update');
     Route::post('/book/delete/{id}', [BookController::class, 'delete'])->name('book.delete');
+    Route::post('/book/delete-image/{bookId}', [BookController::class, 'deleteImage'])->name('book.delete.image');
     Route::post('/book/status/change/{id}', [BookController::class, 'statusChange'])->name('book.status.change');
 
     Route::post('/barcode/generate', [BarcodeController::class, 'generateBarcode'])->name('book.barcode.generate');

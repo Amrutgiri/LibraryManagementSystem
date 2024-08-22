@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\BookImage;
 use Throwable;
 use App\Models\Book;
 use App\Models\Gener;
@@ -148,36 +149,51 @@ class BookController extends Controller
                 'number_of_copy' => $request->number_of_copy,
                 'status' => 1,
             ]);
+            if ($book) {
+                $images = [];
+                if ($request->hasFile('book_image')) {
+                    foreach ($request->file('book_image') as $file) {
+                        $filename = time() . '_' . $file->getClientOriginalName();
+                        $path = $file->move('book_images/', $filename);
+                        $images[] = $path;
+                        BookImage::create([
+                            'book_id' => $book->id,
+                            'image' => $filename,
+                        ]);
+                    }
+                }
+                //  dd($book);
+                $barcodes = [];
+                $barcodeGenerator = new DNS1D();
+                $bookId = $book->id;
+                $number_of_copies = $request->number_of_copy;
 
-            $barcodes = [];
-            $barcodeGenerator = new DNS1D();
-            $bookId = $book->id;
-            $number_of_copies = $request->number_of_copy;
+                for ($i = 1; $i <= $number_of_copies; $i++) {
+                    $rand = rand(1000000000, 9999999999);
 
-            for ($i = 1; $i <= $number_of_copies; $i++) {
-                $rand = rand(1000000000, 9999999999);
+                    // Generate unique barcode for each copy
+                    $code = $bookId . str_pad($rand, 3, '0', STR_PAD_LEFT);
+                    $barcodeImage = $barcodeGenerator->getBarcodePNG($code, 'C128');
 
-                // Generate unique barcode for each copy
-                $code = $bookId . str_pad($rand, 3, '0', STR_PAD_LEFT);
-                $barcodeImage = $barcodeGenerator->getBarcodePNG($code, 'C128');
+                    $fileName = $code . '.png';
+                    $filePath = public_path('barcodes/' . $fileName);
 
-                $fileName = $code . '.png';
-                $filePath = public_path('barcodes/' . $fileName);
-
-                if (!file_exists(public_path('barcodes'))) {
-                    mkdir(public_path('barcodes'), 0755, true);
+                    if (!file_exists(public_path('barcodes'))) {
+                        mkdir(public_path('barcodes'), 0755, true);
+                    }
+                    file_put_contents($filePath, base64_decode($barcodeImage));
+                    // Save barcode to the database
+                    $barcode = new Barcode();
+                    $barcode->book_id = $bookId;
+                    $barcode->barcode = $code;
+                    $barcode->barcode_image = 'barcodes/' . $fileName; // Save as base64 string
+                    $barcode->save();
                 }
 
-
-                file_put_contents($filePath, base64_decode($barcodeImage));
-
-                // Save barcode to the database
-                $barcode = new Barcode();
-                $barcode->book_id = $bookId;
-                $barcode->barcode = $code;
-                $barcode->barcode_image = 'barcodes/' . $fileName; // Save as base64 string
-                $barcode->save();
+            } else {
+                return redirect(route('admin.book.create'))->with('error', 'Book Not Added');
             }
+
 
 
 
@@ -209,6 +225,7 @@ class BookController extends Controller
         $racks = RackManage::where('status', 1)->where('deleted_at', null)->get();
         $genres = Gener::where('status', 1)->where('deleted_at', null)->get();
         $book = Book::findOrFail($id);
+        $bookImages = BookImage::where('book_id', $book->id)->get();
 
         return view('Admin.books.edit', [
             'title' => 'Edit Book',
@@ -217,6 +234,7 @@ class BookController extends Controller
             'racks' => $racks,
             'genres' => $genres,
             'book' => $book,
+            'bookImages' => $bookImages,
         ]);
     }
 
@@ -325,5 +343,34 @@ class BookController extends Controller
         // }
         // $Barcode->delete();
 
+    }
+    public function deleteImage(Request $request, $id)
+    {
+        try {
+            $book_image = BookImage::find($id);
+            $imagePath = $book_image->image;
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+            if ($book_image) {
+                $book_image->delete();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Book Image Deleted Successfully.',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Book Image Not Found.',
+                ]);
+            }
+
+        } catch (Throwable $exception) {
+
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage(),
+            ]);
+        }
     }
 }
