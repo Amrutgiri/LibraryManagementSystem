@@ -128,7 +128,13 @@ var bookTable = $('#book_table').DataTable({
     ],
 
 });
+new DataTable.Buttons(bookTable, {
+    buttons: [
+        'copy', 'excel', 'pdf'
+    ]
+});
 
+bookTable.buttons().container().appendTo( '#toolbar' );
 
 function generateBarcodeFunction(e) {
 

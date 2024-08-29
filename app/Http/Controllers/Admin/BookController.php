@@ -23,8 +23,19 @@ class BookController extends Controller
      */
     public function index()
     {
+        $bookCount = Book::where('status', 1)->where('deleted_at', null)->count();
+        $department = Department::where('status', 1)->where('deleted_at', null)->get();
+        $language = Language::where('status', 1)->where('deleted_at', null)->get();
+        $gener = Gener::where('status', 1)->where('deleted_at', null)->get();
+        $rack = RackManage::where('status', 1)->where('deleted_at', null)->get();
+
         return view('Admin.books.index', [
-            'title' => 'Manage Books'
+            'title' => 'Manage Books',
+            'bookCount' => $bookCount,
+            'department' => $department,
+            'language' => $language,
+            'gener' => $gener,
+            'rack' => $rack,
         ]);
     }
     public function listData(Request $request)
@@ -67,6 +78,7 @@ class BookController extends Controller
         $books = $books->offset($start)
             ->limit($limit)
             ->get();
+
         $data = array();
         if (!empty($books)) {
             $sr_no = '1';
@@ -265,6 +277,19 @@ class BookController extends Controller
                 'notes' => $request->notes,
                 'number_of_copy' => $request->number_of_copy,
             ]);
+
+            $images = [];
+            if ($request->hasFile('book_image')) {
+                foreach ($request->file('book_image') as $file) {
+                    $filename = time() . '_' . $file->getClientOriginalName();
+                    $path = $file->move('book_images/', $filename);
+                    $images[] = $path;
+                    BookImage::create([
+                        'book_id' => $id,
+                        'image' => $filename,
+                    ]);
+                }
+            }
             return redirect(route('admin.book.manage'))->with('success', 'Book Updated Successfully');
 
         } catch (Throwable $th) {

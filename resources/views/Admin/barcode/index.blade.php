@@ -16,6 +16,9 @@
                     class="bi bi-arrow-left"></i>Back</a>
             <a href="{{ route('admin.barcode.delete.all', $book->id) }}" class="btn btn-danger float-right mr-2"><i
                     class="bi bi-trash mr-2"></i>Delete All Barcode</a>
+            <a href="{{ route('admin.book.barcode.print.all', $book->id) }}" target="_blank"
+                class="btn btn-warning float-right mr-2"><i class="bi bi-printer-fill mr-3" style="font-size: 20px;"></i>
+                Print Barcode</a>
         </div>
         <div class="p-5">
             <table class="table hover" id="barcode_table">

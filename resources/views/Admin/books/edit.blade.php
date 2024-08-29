@@ -5,7 +5,7 @@
     <style>
         .preview-container {
             display: flex;
-            flex-wrap: wrap;
+            /*flex-wrap: wrap;*/
             gap: 10px;
         }
 
@@ -200,12 +200,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="row mt-3 mb-3">
-                    <div class="col-lg-6">
-                        <img src="https://www.shutterstock.com/image-photo/dummy-book-isolated-on-white-260nw-1743346814.jpg"
-                            alt="dummy book Image" class="img-thumbnail w-50 h-50">
-                    </div>
-                </div> --}}
+
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="row">

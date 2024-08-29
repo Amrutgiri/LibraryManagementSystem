@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\BarcodeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\RackController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\GenreController;
+use App\Http\Controllers\Admin\PrintController;
+use App\Http\Controllers\Admin\BarcodeController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
@@ -71,6 +72,8 @@ Route::middleware('admin')->group(function () {
     Route::post('/barcode/delete/{id}', [BarcodeController::class, 'delete'])->name('barcode.delete');
     Route::get('/barcode/delete/all/{bookId}', [BarcodeController::class, 'deleteAllBarcode'])->name('barcode.delete.all');
 
-
+    // All Print Routes
+    Route::get('/print/book/barcode/{bookId}', [PrintController::class, 'oneBookBarcodePrint'])->name('book.barcode.print.all');
+    // Route::get('/print/book/barcode/{bookId}', [PrintController::class, 'printBookBarcode'])->name('print.book.barcode');
 
 });
