@@ -12,12 +12,12 @@
                     <div class="widget-data">
                         <div class="weight-700 font-24 text-dark">75</div>
                         <div class="font-14 text-secondary weight-500">
-                            Appointment
+                            Book Issued
                         </div>
                     </div>
                     <div class="widget-icon">
                         <div class="icon" data-color="#00eccf">
-                            <i class="icon-copy dw dw-calendar1"></i>
+                            <i class="icon-copy bi bi-book-half"></i>
                         </div>
                     </div>
                 </div>
@@ -27,14 +27,14 @@
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">124,551</div>
+                        <div class="weight-700 font-24 text-dark">60</div>
                         <div class="font-14 text-secondary weight-500">
-                            Total Patient
+                            Book Returned
                         </div>
                     </div>
                     <div class="widget-icon">
                         <div class="icon" data-color="#ff5b5b">
-                            <span class="icon-copy ti-heart"></span>
+                            <span class="icon-copy bi bi-journal-check"></span>
                         </div>
                     </div>
                 </div>
@@ -44,14 +44,14 @@
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">400+</div>
+                        <div class="weight-700 font-24 text-dark">{{ $total_users }}+</div>
                         <div class="font-14 text-secondary weight-500">
-                            Total Doctor
+                            Total Users
                         </div>
                     </div>
                     <div class="widget-icon">
                         <div class="icon">
-                            <i class="icon-copy fa fa-stethoscope" aria-hidden="true"></i>
+                            <i class="icon-copy bi bi-people" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -61,12 +61,12 @@
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">$50,000</div>
-                        <div class="font-14 text-secondary weight-500">Earning</div>
+                        <div class="weight-700 font-24 text-dark">{{ $total_books }}</div>
+                        <div class="font-14 text-secondary weight-500">Total Books</div>
                     </div>
                     <div class="widget-icon">
                         <div class="icon" data-color="#09cc06">
-                            <i class="icon-copy fa fa-money" aria-hidden="true"></i>
+                            <i class="icon-copy bi bi-bookshelf" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
         <div class="col-md-8 mb-20">
             <div class="card-box height-100-p pd-20">
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3">
-                    <div class="h5 mb-md-0">Hospital Activities</div>
+                    <div class="h5 mb-md-0">Books Activities</div>
                     <div class="form-group mb-md-0">
                         <select class="form-control form-control-sm selectpicker">
                             <option value="">Last Week</option>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-end">
                     <div class="text-white">
-                        <div class="font-14">Appointment</div>
+                        <div class="font-14">New Users</div>
                         <div class="font-24 weight-500">1865</div>
                     </div>
                     <div class="max-width-150">
@@ -125,7 +125,7 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-end">
                     <div class="text-white">
-                        <div class="font-14">Surgery</div>
+                        <div class="font-14">Deactivate Users</div>
                         <div class="font-24 weight-500">250</div>
                     </div>
                     <div class="max-width-150">
@@ -140,7 +140,7 @@
         <div class="col-lg-4 col-md-6 mb-20">
             <div class="card-box height-100-p pd-20 min-height-200px">
                 <div class="d-flex justify-content-between pb-10">
-                    <div class="h5 mb-0">Top Doctors</div>
+                    <div class="h5 mb-0">Top Readers</div>
                     <div class="dropdown">
                         <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" data-color="#1b3133"
                             href="#" role="button" data-toggle="dropdown">
@@ -238,7 +238,7 @@
         <div class="col-lg-4 col-md-6 mb-20">
             <div class="card-box height-100-p pd-20 min-height-200px">
                 <div class="d-flex justify-content-between">
-                    <div class="h5 mb-0">Diseases Report</div>
+                    <div class="h5 mb-0">Missing Book</div>
                     <div class="dropdown">
                         <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" data-color="#1b3133"
                             href="#" role="button" data-toggle="dropdown">
