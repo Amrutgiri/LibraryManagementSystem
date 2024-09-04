@@ -41,6 +41,12 @@
                     </a>
                 </li>
 
+                <li class="dropdown {{ Route::is('admin.settings') ? 'show' : '' }}">
+                    <a href="{{ route('admin.settings') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-gear-fill"></span><span class="mtext">Settings</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

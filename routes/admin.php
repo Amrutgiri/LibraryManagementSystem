@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\PrintController;
 use App\Http\Controllers\Admin\BarcodeController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
@@ -76,4 +77,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/print/book/barcode/{bookId}', [PrintController::class, 'oneBookBarcodePrint'])->name('book.barcode.print.all');
     // Route::get('/print/book/barcode/{bookId}', [PrintController::class, 'printBookBarcode'])->name('print.book.barcode');
 
+    // All Settings Routes
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 });
