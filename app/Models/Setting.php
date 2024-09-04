@@ -11,8 +11,10 @@ class Setting extends Model
 
     protected $table = 'settings';
     protected $fillable = [
-        'name',
-        'value',
+        'max_day_limit',
+        'send_after_mail',
+        'send_before_mail',
+        'form_email'
     ];
 
 }

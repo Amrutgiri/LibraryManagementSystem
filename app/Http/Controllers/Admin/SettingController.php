@@ -10,8 +10,7 @@ class SettingController extends Controller
 {
     public function index()
     {
-        $settings = Setting::all();
-
+        $settings = Setting::first();
 
         return view('Admin.settings.index', [
             'title' => 'Settings',
@@ -19,4 +18,14 @@ class SettingController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id)
+    {
+        $settings = Setting::find($id);
+
+        // dd($request->all());
+
+        $settings->update($request->all());
+
+        return redirect()->route('admin.settings')->with('success', 'Settings updated successfully');
+    }
 }

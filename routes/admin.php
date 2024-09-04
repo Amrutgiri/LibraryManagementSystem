@@ -79,4 +79,5 @@ Route::middleware('admin')->group(function () {
 
     // All Settings Routes
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::post('/settings/update/{id}', [SettingController::class, 'update'])->name('settings.update');
 });
