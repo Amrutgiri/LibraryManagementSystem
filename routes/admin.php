@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PrintController;
 use App\Http\Controllers\Admin\BarcodeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\BookLimitController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
 
@@ -80,4 +81,11 @@ Route::middleware('admin')->group(function () {
     // All Settings Routes
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
     Route::post('/settings/update/{id}', [SettingController::class, 'update'])->name('settings.update');
+
+    // All Book Limit Routes
+    Route::get('/book/limit', [BookLimitController::class, 'index'])->name('book.limit');
+    Route::post('/book/limit/list-data', [BookLimitController::class, 'listData'])->name('book.limit.list.data');
+    Route::post('/book/limit/store', [BookLimitController::class, 'store'])->name('book.limit.store');
+    Route::post('/book/limit/update/{id}', [BookLimitController::class, 'update'])->name('book.limit.update');
+    Route::post('/book/limit/delete/{id}', [BookLimitController::class, 'delete'])->name('book.limit.delete');
 });

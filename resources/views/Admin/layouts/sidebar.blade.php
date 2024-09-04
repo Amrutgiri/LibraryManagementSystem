@@ -41,6 +41,12 @@
                     </a>
                 </li>
 
+                <li class="dropdown {{ Route::is('admin.book.limit') ? 'show' : '' }}">
+                    <a href="{{ route('admin.book.limit') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-ui-radios"></span><span class="mtext">Book Limit</span>
+                    </a>
+                </li>
+
                 <li class="dropdown {{ Route::is('admin.settings') ? 'show' : '' }}">
                     <a href="{{ route('admin.settings') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-gear-fill"></span><span class="mtext">Settings</span>
