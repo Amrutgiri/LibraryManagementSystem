@@ -15,9 +15,11 @@ class SettingSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'max_day_limit' => 7,
+            'max_book_limit' => 2,
             'send_after_mail' => 1,
             'send_before_mail' => 1,
             'form_email' => 'apgoswami.eww@gmail.com',
+            'fine_amount' => 33,
         ]);
     }
 }

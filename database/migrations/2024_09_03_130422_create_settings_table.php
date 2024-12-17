@@ -13,9 +13,11 @@ return new class extends Migration {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('max_day_limit')->nullable(7);
+            $table->bigInteger('max_book_limit')->nullable(2);
             $table->bigInteger('send_after_mail')->nullable();
             $table->bigInteger('send_before_mail')->nullable();
             $table->string('form_email')->nullable();
+            $table->double('fine_amount')->nullable();
             $table->timestamps();
         });
     }

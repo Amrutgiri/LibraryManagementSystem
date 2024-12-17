@@ -29,6 +29,17 @@
                 </div>
 
                 <div class="row align-items-center">
+                    <label class="col-lg-3 d-flex justify-content-end h6">Max Book Limit <span
+                            class="text-danger">*</span></label>
+                    <div class="col-lg-7 align-items-center">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="max_book_limit" id="max_book_limit"
+                                value="{{ old('max_book_limit', $settings->max_book_limit) }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
                     <label class="col-lg-3 d-flex justify-content-end h6">Send Mail After Return Date Expires</label>
                     <div class="col-lg-7 align-items-center">
                         <div class="input-group">
@@ -69,6 +80,16 @@
                         <div class="form-group">
                             <input type="email" class="form-control" name="form_email" id="name"
                                 value="{{ old('form_email', $settings->form_email) }}" placeholder="Enter Day">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex align-items-center">
+                    <label class="col-lg-3 d-flex justify-content-end h6">Fine Amount</label>
+                    <div class="col-lg-7 align-items-center">
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="fine_amount" id="fine_amount"
+                                value="{{ old('fine_amount', $settings->fine_amount) }}" placeholder="Enter Fine Amount">
                         </div>
                     </div>
                 </div>

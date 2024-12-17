@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PrintController;
 use App\Http\Controllers\Admin\BarcodeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\BookIssueController;
 use App\Http\Controllers\Admin\BookLimitController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
@@ -88,4 +89,12 @@ Route::middleware('admin')->group(function () {
     Route::post('/book/limit/store', [BookLimitController::class, 'store'])->name('book.limit.store');
     Route::post('/book/limit/update/{id}', [BookLimitController::class, 'update'])->name('book.limit.update');
     Route::post('/book/limit/delete/{id}', [BookLimitController::class, 'delete'])->name('book.limit.delete');
+
+
+    // All Book Issue Routes
+    Route::get('/book/issue', [BookIssueController::class, 'index'])->name('book.issue');
+    Route::post('/book/user/info', [BookIssueController::class, 'userInfo'])->name('get_user_info');
+    Route::post('/book/issue/list-data', [BookIssueController::class, 'listData'])->name('book.issue.list.data');
+    Route::post('/book/issue/store', [BookIssueController::class, 'store'])->name('book.issue.store');
+    Route::post('/book/issue/delete/{id}', [BookIssueController::class, 'delete'])->name('book.issue.delete');
 });

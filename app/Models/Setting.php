@@ -14,7 +14,8 @@ class Setting extends Model
         'max_day_limit',
         'send_after_mail',
         'send_before_mail',
-        'form_email'
+        'form_email',
+        'fine_amount',
     ];
 
 }

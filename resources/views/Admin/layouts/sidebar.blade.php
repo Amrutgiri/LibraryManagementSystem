@@ -47,6 +47,13 @@
                     </a>
                 </li>
 
+                <li class="dropdown {{ Route::is('admin.book.issue') ? 'show' : '' }}">
+                    <a href="{{ route('admin.book.issue') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-bookshelf"></span><span class="mtext">Book Issue</span>
+                    </a>
+                </li>
+
+
                 <li class="dropdown {{ Route::is('admin.settings') ? 'show' : '' }}">
                     <a href="{{ route('admin.settings') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-gear-fill"></span><span class="mtext">Settings</span>
